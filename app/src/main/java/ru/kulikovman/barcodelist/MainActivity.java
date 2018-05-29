@@ -1,15 +1,20 @@
 package ru.kulikovman.barcodelist;
 
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
+
+    public final String LOG = "myLog";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +31,26 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        //Проверка наличия программы сканирования штрих-кодов
+        barCodeAppExist();
+    }
+
+    private void barCodeAppExist() {
+        PackageManager pm = getPackageManager();
+        PackageInfo pi = null;
+        try {
+            pi = pm.getPackageInfo(getString(R.string.zxing_package), 0);
+        } catch (PackageManager.NameNotFoundException ignored) {
+        }
+
+        if (pi == null) {
+            Log.d(LOG, "Отсутствует необходимый сканер штрих-кодов!");
+            // TODO: Запустить диалог с запросом на установку приложения
+
+        } else {
+            Log.d(LOG, "Сканер штрих-кодов установлен.");
+        }
     }
 
     @Override
