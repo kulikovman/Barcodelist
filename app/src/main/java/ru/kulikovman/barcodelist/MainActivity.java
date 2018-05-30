@@ -1,5 +1,6 @@
 package ru.kulikovman.barcodelist;
 
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,18 +27,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         // Проверка наличия сканера штрих-кодов
         if (!isExistBarcodeScannerApp()) {
-            // Предложить установку
             startInstallDialog();
         }
     }
@@ -53,8 +45,32 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startInstallDialog() {
+        // Предлагаем установить сканер
         DialogFragment installBarcodeScannerDialog = new InstallBarScannerDialog();
         installBarcodeScannerDialog.show(getSupportFragmentManager(), "installBarcodeScannerDialog");
+    }
+
+    public void addBarcode(View view) {
+        if (isExistBarcodeScannerApp()) {
+            Intent intent = new Intent(getString(R.string.zxing_package) + ".SCAN");
+            intent.putExtra("SCAN_MODE", "BAR_CODE_MODE");
+            startActivityForResult(intent, 0);
+        } else {
+            startInstallDialog();
+        }
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        if (requestCode == 0) {
+            if (resultCode == RESULT_OK) {
+                String contents = intent.getStringExtra("SCAN_RESULT");
+                String format = intent.getStringExtra("SCAN_RESULT_FORMAT");
+                Log.d(LOG, contents + " | " + format);
+            } else if (resultCode == RESULT_CANCELED) {
+                // Ничего не делаем
+                Log.d(LOG, "Операция сканирования штрих-кода отменена.");
+            }
+        }
     }
 
     @Override
