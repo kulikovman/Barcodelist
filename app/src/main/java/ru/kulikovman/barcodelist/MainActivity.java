@@ -14,11 +14,14 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import io.realm.Realm;
 import ru.kulikovman.barcodelist.dialog.InstallBarScannerDialog;
 
 public class MainActivity extends AppCompatActivity {
 
     public final String LOG = "myLog";
+
+    private Realm mRealm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,10 +30,20 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // Подключаем базу данных
+        Realm.init(this);
+        mRealm = Realm.getDefaultInstance();
+
         // Проверка наличия сканера штрих-кодов
         if (!isExistBarcodeScannerApp()) {
             startInstallDialog();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mRealm.close();
     }
 
     private boolean isExistBarcodeScannerApp() {
