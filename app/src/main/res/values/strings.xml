@@ -4,8 +4,8 @@
 
     <string name="zxing_package">com.google.zxing.client.android</string>
 
-    <string name="install_zxing_message">Для работы приложения необходимо установить сканер штрих-кодов.</string>
-    <string name="install_zxing_ok">Установить</string>
-    <string name="install_zxing_cancel">Отмена</string>
+    <string name="install_bar_scanner_message">Для работы приложения необходимо установить сканер штрих-кодов.</string>
+    <string name="install_bar_scanner_ok">Установить</string>
+    <string name="install_bar_scanner_cancel">Отмена</string>
 
 </resources>

@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import ru.kulikovman.barcodelist.dialog.InstallBarScannerMessage;
+import ru.kulikovman.barcodelist.dialog.InstallBarScannerDialog;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -48,10 +48,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (pi == null) {
-            Log.d(LOG, "Отсутствует необходимый сканер штрих-кодов!");
             // Запускаем сообщение с предложением установки сканера
-            DialogFragment installBarScannerMessage = new InstallBarScannerMessage();
-            installBarScannerMessage.show(getSupportFragmentManager(), "installBarScannerMessage");
+            DialogFragment installBarScannerDialog = new InstallBarScannerDialog();
+            installBarScannerDialog.show(getSupportFragmentManager(), "installBarScannerDialog");
         } else {
             Log.d(LOG, "Сканер штрих-кодов установлен.");
         }

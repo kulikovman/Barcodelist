@@ -10,19 +10,19 @@ import android.support.v7.app.AlertDialog;
 import ru.kulikovman.barcodelist.R;
 
 
-public class InstallBarScannerMessage extends DialogFragment {
+public class InstallBarScannerDialog extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage(R.string.install_zxing_message)
-                .setPositiveButton(R.string.install_zxing_ok, new DialogInterface.OnClickListener() {
+        builder.setMessage(R.string.install_bar_scanner_message)
+                .setPositiveButton(R.string.install_bar_scanner_ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // Ничего не делаем при нажатии
                     }
                 })
-                .setNegativeButton(R.string.install_zxing_cancel, new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.install_bar_scanner_cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // Ничего не делаем при нажатии
