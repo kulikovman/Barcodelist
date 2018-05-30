@@ -8,7 +8,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -36,13 +35,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Проверка наличия сканера штрих-кодов
-        if (!isExistBarScannerApp()) {
+        if (!isExistBarcodeScannerApp()) {
             // Предложить установку
             startInstallDialog();
         }
     }
 
-    private boolean isExistBarScannerApp() {
+    private boolean isExistBarcodeScannerApp() {
         PackageManager pm = getPackageManager();
         PackageInfo pi = null;
         try {
@@ -54,8 +53,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startInstallDialog() {
-        DialogFragment installBarScannerDialog = new InstallBarScannerDialog();
-        installBarScannerDialog.show(getSupportFragmentManager(), "installBarScannerDialog");
+        DialogFragment installBarcodeScannerDialog = new InstallBarScannerDialog();
+        installBarcodeScannerDialog.show(getSupportFragmentManager(), "installBarcodeScannerDialog");
     }
 
     @Override
