@@ -5,12 +5,15 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import ru.kulikovman.barcodelist.dialog.InstallBarScannerMessage;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //Проверка наличия программы сканирования штрих-кодов
+        //Проверка наличия сканера штрих-кодов
         barCodeAppExist();
     }
 
@@ -46,8 +49,9 @@ public class MainActivity extends AppCompatActivity {
 
         if (pi == null) {
             Log.d(LOG, "Отсутствует необходимый сканер штрих-кодов!");
-            // TODO: Запустить диалог с запросом на установку приложения
-
+            // Запускаем сообщение с предложением установки сканера
+            DialogFragment installBarScannerMessage = new InstallBarScannerMessage();
+            installBarScannerMessage.show(getSupportFragmentManager(), "installBarScannerMessage");
         } else {
             Log.d(LOG, "Сканер штрих-кодов установлен.");
         }
