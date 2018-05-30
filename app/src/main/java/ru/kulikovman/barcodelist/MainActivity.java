@@ -35,11 +35,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //Проверка наличия сканера штрих-кодов
-        barCodeAppExist();
+        // Проверка наличия сканера штрих-кодов
+        if (!isExistBarScannerApp()) {
+            // Предложить установку
+            startInstallDialog();
+        }
     }
 
-    private void barCodeAppExist() {
+    private boolean isExistBarScannerApp() {
         PackageManager pm = getPackageManager();
         PackageInfo pi = null;
         try {
@@ -47,13 +50,12 @@ public class MainActivity extends AppCompatActivity {
         } catch (PackageManager.NameNotFoundException ignored) {
         }
 
-        if (pi == null) {
-            // Запускаем сообщение с предложением установки сканера
-            DialogFragment installBarScannerDialog = new InstallBarScannerDialog();
-            installBarScannerDialog.show(getSupportFragmentManager(), "installBarScannerDialog");
-        } else {
-            Log.d(LOG, "Сканер штрих-кодов установлен.");
-        }
+        return pi != null;
+    }
+
+    private void startInstallDialog() {
+        DialogFragment installBarScannerDialog = new InstallBarScannerDialog();
+        installBarScannerDialog.show(getSupportFragmentManager(), "installBarScannerDialog");
     }
 
     @Override
