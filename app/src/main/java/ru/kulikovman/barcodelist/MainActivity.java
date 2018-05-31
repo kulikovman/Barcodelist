@@ -79,11 +79,25 @@ public class MainActivity extends AppCompatActivity {
                 String contents = intent.getStringExtra("SCAN_RESULT");
                 String format = intent.getStringExtra("SCAN_RESULT_FORMAT");
                 Log.d(LOG, contents + " | " + format);
+
+                // Открываем редактирование штри-кода
+                openEditGoodActivity(contents);
+
             } else if (resultCode == RESULT_CANCELED) {
                 // Ничего не делаем
                 Log.d(LOG, "Операция сканирования штрих-кода отменена.");
             }
         }
+    }
+
+    private void openEditGoodActivity(String barcode) {
+        // Проверяем наличие штрих-кода в базе
+
+        // Если в базе, то показываем диалог - открыть / отмена
+
+        // Если отсутствует, то просто открываем редактирование
+
+
     }
 
     @Override
