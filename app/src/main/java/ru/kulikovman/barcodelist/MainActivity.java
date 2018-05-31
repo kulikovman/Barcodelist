@@ -15,7 +15,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 import ru.kulikovman.barcodelist.dialog.InstallBarScannerDialog;
+import ru.kulikovman.barcodelist.model.Good;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -92,12 +94,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void openEditGoodActivity(String barcode) {
         // Проверяем наличие штрих-кода в базе
+        Good good = mRealm.where(Good.class).equalTo(Good.BARCODE, barcode).findFirst();
 
-        // Если в базе, то показываем диалог - открыть / отмена
+        if (good != null) {
+            // Сообщаем о существовании в базе товара с таким штрих-кодом
 
-        // Если отсутствует, то просто открываем редактирование
+        } else {
+            // Открываем редактирование полученного штрих-кода
 
-
+        }
     }
 
     @Override
