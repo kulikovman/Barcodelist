@@ -3,12 +3,10 @@ package ru.kulikovman.barcodelist.model;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-
-public class Product extends RealmObject {
+public class Good extends RealmObject {
     public static final String ID = "mId";
     public static final String NAME = "mName";
     public static final String BARCODE = "mBarcode";
-    public static final String BARCODE_TYPE = "mBarcodeType";
     public static final String GROUP = "mGroup";
 
     @PrimaryKey
@@ -16,18 +14,16 @@ public class Product extends RealmObject {
 
     private String mName;
     private long mBarcode;
-    private String mBarcodeType;
     private String mGroup;
 
-    public Product(String name, long barcode, String barcodeType, String group) {
+    public Good(String name, long barcode, String group) {
         mId = System.currentTimeMillis();
         mName = name;
         mBarcode = barcode;
-        mBarcodeType = barcodeType;
         mGroup = group;
     }
 
-    public Product() {
+    public Good() {
     }
 
     public long getId() {
@@ -52,14 +48,6 @@ public class Product extends RealmObject {
 
     public void setBarcode(long barcode) {
         mBarcode = barcode;
-    }
-
-    public String getBarcodeType() {
-        return mBarcodeType;
-    }
-
-    public void setBarcodeType(String barcodeType) {
-        mBarcodeType = barcodeType;
     }
 
     public String getGroup() {
