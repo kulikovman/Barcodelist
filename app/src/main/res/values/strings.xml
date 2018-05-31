@@ -8,5 +8,10 @@
     <string name="install_bar_scanner_message">Для работы приложения необходимо установить сканер штрих-кодов.</string>
     <string name="install_bar_scanner_ok">Установить</string>
     <string name="install_bar_scanner_cancel">Отмена</string>
+    <string name="edit_button_save">Сохранить</string>
+    <string name="edit_button_cancel">Отмена</string>
+    <string name="edit_title_barcode">Номер штрих-кода:</string>
+    <string name="edit_hint_name">Наименование</string>
+    <string name="edit_hint_group">Группа</string>
 
 </resources>
