@@ -12,7 +12,7 @@ import android.support.v7.app.AlertDialog;
 import ru.kulikovman.barcodelist.R;
 
 
-public class InstallBarScannerDialog extends DialogFragment {
+public class InstallBarcodeScannerDialog extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

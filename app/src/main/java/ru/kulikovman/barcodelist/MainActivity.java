@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -15,8 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import io.realm.Realm;
-import io.realm.RealmResults;
-import ru.kulikovman.barcodelist.dialog.InstallBarScannerDialog;
+import ru.kulikovman.barcodelist.dialog.InstallBarcodeScannerDialog;
 import ru.kulikovman.barcodelist.model.Good;
 
 public class MainActivity extends AppCompatActivity {
@@ -61,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void startInstallDialog() {
         // Предлагаем установить сканер
-        DialogFragment installBarcodeScannerDialog = new InstallBarScannerDialog();
+        DialogFragment installBarcodeScannerDialog = new InstallBarcodeScannerDialog();
         installBarcodeScannerDialog.show(getSupportFragmentManager(), "installBarcodeScannerDialog");
     }
 
@@ -100,8 +97,10 @@ public class MainActivity extends AppCompatActivity {
             // Сообщаем о существовании в базе товара с таким штрих-кодом
 
         } else {
-            // Открываем редактирование полученного штрих-кода
-
+            // Редактирование полученного штрих-кода
+            Intent editGoodActivity = new Intent(this, EditGoodActivity.class);
+            editGoodActivity.putExtra("barcode", barcode);
+            startActivity(editGoodActivity);
         }
     }
 
