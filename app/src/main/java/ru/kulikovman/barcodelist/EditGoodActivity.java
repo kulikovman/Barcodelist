@@ -3,6 +3,7 @@ package ru.kulikovman.barcodelist;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -12,12 +13,11 @@ import ru.kulikovman.barcodelist.dialog.BarcodeNameIsEmptyDialog;
 import ru.kulikovman.barcodelist.model.Good;
 
 public class EditGoodActivity extends AppCompatActivity {
-
     private Realm mRealm;
     private Good mGood;
 
     private TextView mBarcodeField;
-    private EditText mName, mGroup;
+    private EditText mNameField, mGroupField;
 
     private String mBarcode;
 
@@ -30,20 +30,26 @@ public class EditGoodActivity extends AppCompatActivity {
         mRealm = Realm.getDefaultInstance();
 
         // Инициализируем необходимые вью элементы
-        mBarcodeField = findViewById(R.id.edit_title_barcode);
-        mName = findViewById(R.id.edit_name);
-        mGroup = findViewById(R.id.edit_group);
+        mBarcodeField = findViewById(R.id.edit_barcode);
+        mNameField = findViewById(R.id.edit_name);
+        mGroupField = findViewById(R.id.edit_group);
 
         // Получаем штрих-код и сохраняем его в поле
         mBarcode = (String) getIntent().getSerializableExtra("barcode");
         mBarcodeField.setText(mBarcode);
 
         // Если штрих-код в базе, то заполняем остальные поля
-        mGood = mRealm.where(Good.class).equalTo(Good.BARCODE, mBarcode).findFirst();
+        Good good = mRealm.where(Good.class).equalTo(Good.BARCODE, mBarcode).findFirst();
 
-        if (mGood != null) {
-            mName.setText(mGood.getName());
-            mGroup.setText(mGood.getGroup());
+        if (good != null) {
+            // Делаем управляемый объект
+            mRealm.beginTransaction();
+            mGood = mRealm.copyToRealm(good);
+            mRealm.commitTransaction();
+
+            // Заполняем поля
+            mNameField.setText(mGood.getName());
+            mGroupField.setText(mGood.getGroup());
         }
     }
 
@@ -54,23 +60,26 @@ public class EditGoodActivity extends AppCompatActivity {
     }
 
     public void saveButton(View view) {
-        String barcodeName = mName.getText().toString().trim();
-        String barcodeGroup = mGroup.getText().toString().trim();
+        String barcodeName = mNameField.getText().toString().trim();
+        String barcodeGroup = mGroupField.getText().toString().trim();
 
-        // Если имя не пустое
-        if (!barcodeName.isEmpty()) {
-            // Создаем или обновляем товар
+        Log.d("log", "Получили строки из полей: " + barcodeName + " | " + barcodeGroup);
+
+        // Если наименование не пустое
+        if (!barcodeName.equals("")) {
+            // Обновляем или создаем товар
+            mRealm.beginTransaction();
             if (mGood != null) {
                 mGood.setName(barcodeName);
                 mGood.setGroup(barcodeGroup);
             } else {
-                mGood = new Good(mBarcode, barcodeName, barcodeGroup);
+                mRealm.insert(new Good(mBarcode, barcodeName, barcodeGroup));
             }
-
-            // Сохраняем в базе
-            mRealm.beginTransaction();
-            mRealm.insertOrUpdate(mGood);
             mRealm.commitTransaction();
+            Log.d("log", "Товар успешно сохранен");
+
+            // Переходим назад
+            onBackPressed();
         } else {
             // Показываем предупреждающее сообщение
             DialogFragment barcodeNameIsEmptyDialog = new BarcodeNameIsEmptyDialog();

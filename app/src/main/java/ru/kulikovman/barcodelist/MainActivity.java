@@ -18,16 +18,13 @@ import ru.kulikovman.barcodelist.dialog.InstallBarcodeScannerDialog;
 import ru.kulikovman.barcodelist.model.Good;
 
 public class MainActivity extends AppCompatActivity {
-
-    public final String LOG = "myLog";
-
     private Realm mRealm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         // Подключаем базу данных
@@ -73,19 +70,21 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
         if (requestCode == 0) {
             if (resultCode == RESULT_OK) {
                 String contents = intent.getStringExtra("SCAN_RESULT");
                 String format = intent.getStringExtra("SCAN_RESULT_FORMAT");
-                Log.d(LOG, contents + " | " + format);
+                Log.d("log", contents + " | " + format);
 
-                // Открываем редактирование штри-кода
+                // Запускаем редактирование штрих-кода
                 openEditGoodActivity(contents);
 
             } else if (resultCode == RESULT_CANCELED) {
                 // Ничего не делаем
-                Log.d(LOG, "Операция сканирования штрих-кода отменена.");
+                Log.d("log", "Операция сканирования штрих-кода отменена");
             }
         }
     }

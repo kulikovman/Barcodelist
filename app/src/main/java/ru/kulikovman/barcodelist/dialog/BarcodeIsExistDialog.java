@@ -7,16 +7,19 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 
 import ru.kulikovman.barcodelist.EditGoodActivity;
 import ru.kulikovman.barcodelist.R;
 
 
 public class BarcodeIsExistDialog extends DialogFragment {
+
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Получаем штрих-код из аргументов
+        assert getArguments() != null;
         final String barcode = getArguments().getString("barcode");
 
         // Создаем диалог
