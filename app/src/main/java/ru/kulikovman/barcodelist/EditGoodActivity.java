@@ -50,6 +50,16 @@ public class EditGoodActivity extends AppCompatActivity {
     }
 
     public void saveButton(View view) {
+        String barcodeName = mName.getText().toString().trim();
+        String barcodeGroup = mGroup.getText().toString().trim();
+
+        if (!barcodeName.isEmpty()) {
+            // Сохраняем штрих-код в базе
+
+        } else {
+            // Предупреждение о том, что имя не должно быть пустым
+
+        }
     }
 
     public void cancelButton(View view) {
