@@ -16,6 +16,7 @@ public class InstallBarcodeScannerDialog extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        // Создаем диалог
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage(R.string.message_install_barcode_scanner)
                 .setPositiveButton(R.string.button_install, new DialogInterface.OnClickListener() {
