@@ -2,14 +2,21 @@
     <string name="app_name">Barcode list</string>
     <string name="action_settings">Settings</string>
 
+    <!-- Ссылки на сканер -->
     <string name="zxing_package">com.google.zxing.client.android</string>
     <string name="zxing_market_link">market://details?id=com.google.zxing.client.android</string>
 
-    <string name="install_bar_scanner_message">Для работы приложения необходимо установить сканер штрих-кодов.</string>
-    <string name="install_bar_scanner_ok">Установить</string>
-    <string name="install_bar_scanner_cancel">Отмена</string>
-    <string name="edit_button_save">Сохранить</string>
-    <string name="edit_button_cancel">Отмена</string>
+    <!-- Кнопки -->
+    <string name="button_install">Установить</string>
+    <string name="button_open">Открыть</string>
+    <string name="button_save">Сохранить</string>
+    <string name="button_cancel">Отмена</string>
+
+    <!-- Сообщения диалогов -->
+    <string name="message_install_barcode_scanner">Для работы приложения необходимо установить сканер штрих-кодов.</string>
+    <string name="message_barcode_is_exist">Товар с таким штрих-кодом уже присутствует в базе. Открыть его?</string>
+
+    <!-- Все остальное -->
     <string name="edit_title_barcode">Номер штрих-кода:</string>
     <string name="edit_hint_name">Наименование</string>
     <string name="edit_hint_group">Группа</string>

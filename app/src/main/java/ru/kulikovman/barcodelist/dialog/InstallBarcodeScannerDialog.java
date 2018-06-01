@@ -17,8 +17,8 @@ public class InstallBarcodeScannerDialog extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage(R.string.install_bar_scanner_message)
-                .setPositiveButton(R.string.install_bar_scanner_ok, new DialogInterface.OnClickListener() {
+        builder.setMessage(R.string.message_install_barcode_scanner)
+                .setPositiveButton(R.string.button_install, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // Переадресация на страницу приложения в маркете
@@ -27,7 +27,7 @@ public class InstallBarcodeScannerDialog extends DialogFragment {
                         startActivity(intent);
                     }
                 })
-                .setNegativeButton(R.string.install_bar_scanner_cancel, new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.button_cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // Ничего не делаем при нажатии
