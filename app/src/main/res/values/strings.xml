@@ -11,10 +11,12 @@
     <string name="button_open">Открыть</string>
     <string name="button_save">Сохранить</string>
     <string name="button_cancel">Отмена</string>
+    <string name="button_ok">Ок</string>
 
     <!-- Сообщения диалогов -->
     <string name="message_install_barcode_scanner">Для работы приложения необходимо установить сканер штрих-кодов.</string>
     <string name="message_barcode_is_exist">Товар с таким штрих-кодом уже присутствует в базе. Открыть его?</string>
+    <string name="message_barcode_name_is_empty">Наименование товара не должно быть пустым!</string>
 
     <!-- Все остальное -->
     <string name="edit_title_barcode">Номер штрих-кода:</string>
