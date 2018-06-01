@@ -43,6 +43,12 @@ public class EditGoodActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mRealm.close();
+    }
+
     public void saveButton(View view) {
     }
 
