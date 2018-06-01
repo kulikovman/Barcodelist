@@ -16,7 +16,7 @@ public class Good extends RealmObject {
     private String mName;
     private String mGroup;
 
-    public Good(String name, String barcode, String group) {
+    public Good(String barcode, String name, String group) {
         mId = System.currentTimeMillis();
         mBarcode = barcode;
         mName = name;
