@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import io.realm.Realm;
+import ru.kulikovman.barcodelist.dialog.BarcodeIsExistDialog;
 import ru.kulikovman.barcodelist.dialog.InstallBarcodeScannerDialog;
 import ru.kulikovman.barcodelist.model.Good;
 
@@ -95,7 +96,11 @@ public class MainActivity extends AppCompatActivity {
 
         if (good != null) {
             // Сообщаем о существовании в базе товара с таким штрих-кодом
-
+            Bundle args = new Bundle();
+            args.putString("barcode", barcode);
+            DialogFragment barcodeIsExistDialog = new BarcodeIsExistDialog();
+            barcodeIsExistDialog.setArguments(args);
+            barcodeIsExistDialog.show(getSupportFragmentManager(), "barcodeIsExistDialog");
         } else {
             // Редактирование полученного штрих-кода
             Intent editGoodActivity = new Intent(this, EditGoodActivity.class);

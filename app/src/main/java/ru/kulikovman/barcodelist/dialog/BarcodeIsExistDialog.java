@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 
+import ru.kulikovman.barcodelist.EditGoodActivity;
 import ru.kulikovman.barcodelist.R;
 
 
@@ -21,10 +22,10 @@ public class BarcodeIsExistDialog extends DialogFragment {
                 .setPositiveButton(R.string.button_open, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // Переадресация на страницу приложения в маркете
-                        Intent intent = new Intent(Intent.ACTION_VIEW);
-                        intent.setData(Uri.parse(getString(R.string.zxing_market_link)));
-                        startActivity(intent);
+                        // Открываем штрих-код для редактирования
+                        Intent editGoodActivity = new Intent(getActivity(), EditGoodActivity.class);
+                        editGoodActivity.putExtra("barcode", barcode);
+                        startActivity(editGoodActivity);
                     }
                 })
                 .setNegativeButton(R.string.button_cancel, new DialogInterface.OnClickListener() {
