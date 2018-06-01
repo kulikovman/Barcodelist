@@ -3,7 +3,6 @@ package ru.kulikovman.barcodelist.dialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -17,6 +16,10 @@ public class BarcodeIsExistDialog extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        // Получаем штрих-код из аргументов
+        final String barcode = getArguments().getString("barcode");
+
+        // Создаем диалог
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage(R.string.message_barcode_is_exist)
                 .setPositiveButton(R.string.button_open, new DialogInterface.OnClickListener() {
