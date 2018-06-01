@@ -2,6 +2,7 @@ package ru.kulikovman.barcodelist;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -40,5 +41,11 @@ public class EditGoodActivity extends AppCompatActivity {
             mName.setText(mGood.getName());
             mGroup.setText(mGood.getGroup());
         }
+    }
+
+    public void saveButton(View view) {
+    }
+
+    public void cancelButton(View view) {
     }
 }
