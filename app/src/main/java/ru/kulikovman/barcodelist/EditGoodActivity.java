@@ -53,5 +53,6 @@ public class EditGoodActivity extends AppCompatActivity {
     }
 
     public void cancelButton(View view) {
+        onBackPressed();
     }
 }
