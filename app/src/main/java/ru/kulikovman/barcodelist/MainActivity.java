@@ -13,9 +13,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import io.realm.Realm;
-import ru.kulikovman.barcodelist.dialog.BarcodeIsExistDialog;
-import ru.kulikovman.barcodelist.dialog.InstallBarcodeScannerDialog;
-import ru.kulikovman.barcodelist.model.Good;
+import ru.kulikovman.barcodelist.dialogs.BarcodeIsExistDialog;
+import ru.kulikovman.barcodelist.dialogs.InstallBarcodeScannerDialog;
+import ru.kulikovman.barcodelist.models.Good;
 
 public class MainActivity extends AppCompatActivity {
     private Realm mRealm;

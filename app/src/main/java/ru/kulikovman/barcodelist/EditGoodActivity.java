@@ -9,8 +9,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import io.realm.Realm;
-import ru.kulikovman.barcodelist.dialog.BarcodeNameIsEmptyDialog;
-import ru.kulikovman.barcodelist.model.Good;
+import ru.kulikovman.barcodelist.dialogs.BarcodeNameIsEmptyDialog;
+import ru.kulikovman.barcodelist.models.Good;
 
 public class EditGoodActivity extends AppCompatActivity {
     private Realm mRealm;

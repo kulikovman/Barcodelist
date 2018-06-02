@@ -1,4 +1,4 @@
-package ru.kulikovman.barcodelist.dialog;
+package ru.kulikovman.barcodelist.dialogs;
 
 import android.app.Dialog;
 import android.content.DialogInterface;

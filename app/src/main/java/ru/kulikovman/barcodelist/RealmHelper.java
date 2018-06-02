@@ -3,7 +3,7 @@ package ru.kulikovman.barcodelist;
 import io.realm.OrderedRealmCollection;
 import io.realm.Realm;
 import io.realm.Sort;
-import ru.kulikovman.barcodelist.model.Good;
+import ru.kulikovman.barcodelist.models.Good;
 
 public class RealmHelper {
     private static RealmHelper sRealmHelper;

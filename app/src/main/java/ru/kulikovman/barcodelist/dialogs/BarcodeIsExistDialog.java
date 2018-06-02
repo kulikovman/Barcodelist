@@ -1,4 +1,4 @@
-package ru.kulikovman.barcodelist.dialog;
+package ru.kulikovman.barcodelist.dialogs;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 
 import ru.kulikovman.barcodelist.EditGoodActivity;
 import ru.kulikovman.barcodelist.R;
