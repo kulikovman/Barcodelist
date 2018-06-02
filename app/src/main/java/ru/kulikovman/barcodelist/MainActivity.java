@@ -54,16 +54,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setUpRecyclerView() {
+        // Получение списка групп
         List<String> groups = new ArrayList<>();
-        groups.add("sdfhsfdhdfhg");
-        groups.add("dfrth");
-        groups.add("thhjyt");
-        groups.add("wretr");
-        groups.add("bmyuy");
+        RealmResults<Good> goods = mRealm.where(Good.class).findAll();
+        for (Good good : goods) {
+            String group = good.getGroup();
+            if (!groups.contains(group)){
+                groups.add(group);
+            }
+        }
 
-
-        //RealmResults<Good> goods = mRealm.where(Good.class).findAll();
-
+        // Подключение адаптера
         mAdapter = new GroupAdapter(this, groups);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter);
