@@ -6,19 +6,29 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import io.realm.Realm;
+import io.realm.RealmResults;
+import ru.kulikovman.barcodelist.adapters.GroupAdapter;
 import ru.kulikovman.barcodelist.dialogs.BarcodeIsExistDialog;
 import ru.kulikovman.barcodelist.dialogs.InstallBarcodeScannerDialog;
 import ru.kulikovman.barcodelist.models.Good;
 
 public class MainActivity extends AppCompatActivity {
     private Realm mRealm;
+
+    private GroupAdapter mAdapter;
+    private RecyclerView mRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +41,33 @@ public class MainActivity extends AppCompatActivity {
         Realm.init(this);
         mRealm = Realm.getDefaultInstance();
 
+        // Инициализация вью элементов
+        mRecyclerView = findViewById(R.id.item_group_recyclerview);
+
         // Проверка наличия сканера штрих-кодов
         if (!isExistBarcodeScannerApp()) {
             startInstallDialog();
         }
+
+        // Запускаем список
+        setUpRecyclerView();
+    }
+
+    private void setUpRecyclerView() {
+        List<String> groups = new ArrayList<>();
+        groups.add("sdfhsfdhdfhg");
+        groups.add("dfrth");
+        groups.add("thhjyt");
+        groups.add("wretr");
+        groups.add("bmyuy");
+
+
+        //RealmResults<Good> goods = mRealm.where(Good.class).findAll();
+
+        mAdapter = new GroupAdapter(this, groups);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setHasFixedSize(true);
     }
 
     @Override
