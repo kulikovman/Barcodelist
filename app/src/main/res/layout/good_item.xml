@@ -1,23 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="0dp"
+        android:id="@+id/item_good_name"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginStart="32dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:text="Пример наименования товара"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-</android.support.constraint.ConstraintLayout>
+        android:text="Пример наименования товара"/>
+
+</LinearLayout>
