@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         mRealm = Realm.getDefaultInstance();
 
         // Инициализация вью элементов
-        mRecyclerView = findViewById(R.id.item_group_recyclerview);
+        mRecyclerView = findViewById(R.id.main_recycler_view);
 
         // Проверка наличия сканера штрих-кодов
         if (!isExistBarcodeScannerApp()) {
