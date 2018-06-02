@@ -12,11 +12,10 @@ public class Good extends RealmObject {
     @PrimaryKey
     private long mId;
 
-    private String mBarcode;
-    private String mName;
-    private String mGroup;
+    private String mBarcode, mName;
+    private Group mGroup;
 
-    public Good(String barcode, String name, String group) {
+    public Good(String barcode, String name, Group group) {
         mId = System.currentTimeMillis();
         mBarcode = barcode;
         mName = name;
@@ -50,11 +49,11 @@ public class Good extends RealmObject {
         mName = name;
     }
 
-    public String getGroup() {
+    public Group getGroup() {
         return mGroup;
     }
 
-    public void setGroup(String group) {
+    public void setGroup(Group group) {
         mGroup = group;
     }
 }
