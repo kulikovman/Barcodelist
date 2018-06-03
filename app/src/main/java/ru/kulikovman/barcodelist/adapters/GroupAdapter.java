@@ -25,6 +25,12 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
     private Context mContext;
     private List<String> mGroups;
 
+    public GroupAdapter(Context context, List<String> groups, Realm realm) {
+        mGroups = groups;
+        mContext = context;
+        mRealm = realm;
+    }
+
     public class GroupHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private GoodAdapter mAdapter;
         private TextView mGroupName;
@@ -93,12 +99,6 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
     @Override
     public int getItemCount() {
         return mGroups.size();
-    }
-
-    public GroupAdapter(Context context, List<String> groups, Realm realm) {
-        mGroups = groups;
-        mContext = context;
-        mRealm = realm;
     }
 
     public void setGroups(List<String> groups) {

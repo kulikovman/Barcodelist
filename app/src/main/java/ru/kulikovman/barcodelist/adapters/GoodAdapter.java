@@ -19,6 +19,12 @@ public class GoodAdapter extends RecyclerView.Adapter<GoodAdapter.GoodHolder> {
     private Context mContext;
     private List<Good> mGoods;
 
+    public GoodAdapter(Context context, List<Good> goods) {
+        setHasStableIds(true);
+        mContext = context;
+        mGoods = goods;
+    }
+
     public class GoodHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private Good mGood;
         private TextView mGoodName;
@@ -64,10 +70,5 @@ public class GoodAdapter extends RecyclerView.Adapter<GoodAdapter.GoodHolder> {
     @Override
     public int getItemCount() {
         return mGoods.size();
-    }
-
-    public GoodAdapter(Context context, List<Good> goods) {
-        mContext = context;
-        mGoods = goods;
     }
 }
