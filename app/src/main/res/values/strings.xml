@@ -19,9 +19,14 @@
     <string name="message_barcode_is_exist">Товар с таким штрих-кодом уже присутствует в базе. Открыть его?</string>
     <string name="message_barcode_name_is_empty">Наименование товара не должно быть пустым!</string>
 
+    <!-- Пункты меню -->
+    <string name="menu_send_data">Отправка данных</string>
+    <string name="menu_delete_data">Удаление данных</string>
+
     <!-- Все остальное -->
     <string name="edit_title_barcode">Номер штрих-кода:</string>
     <string name="edit_hint_name">Наименование</string>
     <string name="edit_hint_group">Группа</string>
+
 
 </resources>
