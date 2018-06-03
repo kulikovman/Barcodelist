@@ -176,6 +176,14 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_delete_all_data) {
+            // Удаление всех данных
+
+
+
+            return true;
+        } else if (id == R.id.action_send_data) {
+            // Отправка данных
+
             return true;
         }
 
