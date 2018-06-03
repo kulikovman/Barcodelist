@@ -26,6 +26,11 @@ public class EditGoodActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_good);
 
+        // Кнопка назад
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
         // Подключаем базу данных
         mRealm = Realm.getDefaultInstance();
 
@@ -51,6 +56,12 @@ public class EditGoodActivity extends AppCompatActivity {
             mNameField.setText(mGood.getName());
             mGroupField.setText(mGood.getGroup());
         }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
     }
 
     @Override
