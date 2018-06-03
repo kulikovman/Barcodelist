@@ -1,6 +1,7 @@
 package ru.kulikovman.barcodelist.dialogs;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -10,11 +11,23 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 
 import io.realm.Realm;
+import ru.kulikovman.barcodelist.CallbackDialogFragment;
 import ru.kulikovman.barcodelist.R;
 
 
-public class DataDeletionWarningDialog extends DialogFragment {
+public class DataDeletionWarningDialog extends CallbackDialogFragment {
     private Realm mRealm;
+    private CallbackDialogListener mListener;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            mListener = (CallbackDialogListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + " must implement CallbackDialogListener");
+        }
+    }
 
     @NonNull
     @Override
@@ -46,5 +59,14 @@ public class DataDeletionWarningDialog extends DialogFragment {
                 });
 
         return builder.create();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mRealm.close();
+
+        // Запускаем код в активити
+        mListener.onDialogFinish(DataDeletionWarningDialog.this);
     }
 }

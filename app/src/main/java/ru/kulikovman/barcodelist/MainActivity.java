@@ -26,7 +26,7 @@ import ru.kulikovman.barcodelist.dialogs.DataDeletionWarningDialog;
 import ru.kulikovman.barcodelist.dialogs.InstallBarcodeScannerDialog;
 import ru.kulikovman.barcodelist.models.Good;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements CallbackDialogFragment.CallbackDialogListener {
     private Realm mRealm;
 
     private GroupAdapter mAdapter;
@@ -188,5 +188,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onDialogFinish(DialogFragment dialog) {
+
     }
 }
