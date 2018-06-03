@@ -43,7 +43,7 @@ public class GoodAdapter extends RecyclerView.Adapter<GoodAdapter.GoodHolder> {
 
         public void bindGood(Good good) {
             mGood = good;
-            String textForItem = good.getName() + " - " + good.getBarcode();
+            String textForItem = good.getBarcode() + " - " + good.getName();
             mGoodName.setText(textForItem);
         }
     }
