@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // Подключение адаптера
-        mAdapter = new GroupAdapter(this, groups);
+        mAdapter = new GroupAdapter(this, groups, mRealm);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setHasFixedSize(true);

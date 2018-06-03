@@ -10,9 +10,11 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import io.realm.Realm;
 import ru.kulikovman.barcodelist.R;
 
 public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder> {
+    private Realm mRealm;
     private Context mContext;
     private List<String> mGroups;
 
@@ -68,9 +70,10 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
         return mGroups.size();
     }
 
-    public GroupAdapter(Context context, List<String> groups) {
+    public GroupAdapter(Context context, List<String> groups, Realm realm) {
         mGroups = groups;
         mContext = context;
+        mRealm = realm;
     }
 
 
