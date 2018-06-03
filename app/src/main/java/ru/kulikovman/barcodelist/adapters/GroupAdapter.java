@@ -2,6 +2,7 @@ package ru.kulikovman.barcodelist.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +12,10 @@ import android.widget.TextView;
 import java.util.List;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
+import io.realm.Sort;
 import ru.kulikovman.barcodelist.R;
+import ru.kulikovman.barcodelist.models.Good;
 
 public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder> {
     private Realm mRealm;
@@ -19,6 +23,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
     private List<String> mGroups;
 
     public class GroupHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        private GoodAdapter mAdapter;
         private TextView mGroupName;
         private RecyclerView mGroupRecyclerView;
 
@@ -49,6 +54,19 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
             } else {
                 mGroupName.setText(group);
             }
+
+            // Формируем список товаров группы
+            RealmResults<Good> goods = mRealm.where(Good.class)
+                    .equalTo(Good.GROUP, group)
+                    .sort(Good.NAME, Sort.ASCENDING)
+                    .findAll();
+
+
+            // Подключаем адаптер
+            mAdapter = new GoodAdapter(mContext, goods);
+            mGroupRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+            mGroupRecyclerView.setAdapter(mAdapter);
+            mGroupRecyclerView.setHasFixedSize(true);
         }
     }
 
@@ -75,6 +93,4 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
         mContext = context;
         mRealm = realm;
     }
-
-
 }
