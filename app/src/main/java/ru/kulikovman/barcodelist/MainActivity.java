@@ -72,6 +72,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+
+        // Обновляем списки
+        mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         mRealm.close();
