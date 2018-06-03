@@ -1,6 +1,7 @@
 package ru.kulikovman.barcodelist.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import ru.kulikovman.barcodelist.EditGoodActivity;
 import ru.kulikovman.barcodelist.R;
 import ru.kulikovman.barcodelist.models.Good;
 
@@ -18,6 +20,7 @@ public class GoodAdapter extends RecyclerView.Adapter<GoodAdapter.GoodHolder> {
     private List<Good> mGoods;
 
     public class GoodHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        private Good mGood;
         private TextView mGoodName;
 
         public GoodHolder(View itemView) {
@@ -33,12 +36,13 @@ public class GoodAdapter extends RecyclerView.Adapter<GoodAdapter.GoodHolder> {
         @Override
         public void onClick(View v) {
             // Открываем товар при нажатии
-            /*Intent editGoodActivity = new Intent(mContext, EditGoodActivity.class);
-            editGoodActivity.putExtra("barcode", barcode);
-            startActivity(editGoodActivity);*/
+            Intent editGoodActivity = new Intent(mContext, EditGoodActivity.class);
+            editGoodActivity.putExtra("barcode", mGood.getBarcode());
+            mContext.startActivity(editGoodActivity);
         }
 
         public void bindGood(Good good) {
+            mGood = good;
             String textForItem = good.getName() + " - " + good.getBarcode();
             mGoodName.setText(textForItem);
         }
