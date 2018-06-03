@@ -1,18 +1,19 @@
 package ru.kulikovman.barcodelist.adapters;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
+import android.support.v7.content.res.AppCompatResources;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.security.acl.Group;
 import java.util.List;
 
-import io.realm.Case;
 import io.realm.Realm;
 import io.realm.RealmResults;
 import io.realm.Sort;
@@ -27,6 +28,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
     public class GroupHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private GoodAdapter mAdapter;
         private TextView mGroupName;
+        private ImageView mGroupIcon;
         private RecyclerView mGroupRecyclerView;
 
         public GroupHolder(View itemView) {
@@ -38,14 +40,18 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
             // Инициализируем вью элементы
             mGroupName = itemView.findViewById(R.id.item_group_name);
             mGroupRecyclerView = itemView.findViewById(R.id.item_group_recyclerview);
+            mGroupIcon = itemView.findViewById(R.id.item_group_icon);
         }
 
         @Override
         public void onClick(View v) {
+            // Смена видимости списка товаров и иконки
             if (mGroupRecyclerView.getVisibility() == View.GONE) {
                 mGroupRecyclerView.setVisibility(View.VISIBLE);
+                mGroupIcon.setImageDrawable(AppCompatResources.getDrawable(mContext, R.drawable.ic_folder_open_black_24dp));
             } else {
                 mGroupRecyclerView.setVisibility(View.GONE);
+                mGroupIcon.setImageDrawable(AppCompatResources.getDrawable(mContext, R.drawable.ic_folder_black_24dp));
             }
         }
 
