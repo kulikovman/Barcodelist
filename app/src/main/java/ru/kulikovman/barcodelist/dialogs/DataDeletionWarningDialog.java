@@ -13,7 +13,7 @@ import io.realm.Realm;
 import ru.kulikovman.barcodelist.R;
 
 
-public class DataDeletionDialog extends DialogFragment {
+public class DataDeletionWarningDialog extends DialogFragment {
     private Realm mRealm;
 
     @NonNull
@@ -34,7 +34,8 @@ public class DataDeletionDialog extends DialogFragment {
                         mRealm.commitTransaction();
 
                         // Сообщение об успешном удалении
-
+                        DialogFragment dataHasBeenDeletedDialog = new DataHasBeenDeletedDialog();
+                        dataHasBeenDeletedDialog.show(getActivity().getSupportFragmentManager(), "dataHasBeenDeletedDialog");
                     }
                 })
                 .setNegativeButton(R.string.button_cancel, new DialogInterface.OnClickListener() {
