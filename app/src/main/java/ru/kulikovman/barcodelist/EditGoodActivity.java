@@ -87,7 +87,7 @@ public class EditGoodActivity extends AppCompatActivity {
         }
     }
 
-    public void cancelButton(View view) {
+    public void deleteButton(View view) {
         // Удаляем товар
         if (mGood != null) {
             mRealm.beginTransaction();
@@ -97,5 +97,13 @@ public class EditGoodActivity extends AppCompatActivity {
 
         // Переходим назад
         onBackPressed();
+    }
+
+    public void clearNameField(View view) {
+        mNameField.setText("");
+    }
+
+    public void clearGroupField(View view) {
+        mGroupField.setText("");
     }
 }
