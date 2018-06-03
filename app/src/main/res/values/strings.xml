@@ -10,6 +10,7 @@
     <string name="button_install">Установить</string>
     <string name="button_open">Открыть</string>
     <string name="button_save">Сохранить</string>
+    <string name="button_delete">Удалить</string>
     <string name="button_cancel">Отмена</string>
     <string name="button_ok">Ок</string>
 

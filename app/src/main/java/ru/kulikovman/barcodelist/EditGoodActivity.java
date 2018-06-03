@@ -88,6 +88,14 @@ public class EditGoodActivity extends AppCompatActivity {
     }
 
     public void cancelButton(View view) {
+        // Удаляем товар
+        if (mGood != null) {
+            mRealm.beginTransaction();
+            mGood.deleteFromRealm();
+            mRealm.commitTransaction();
+        }
+
+        // Переходим назад
         onBackPressed();
     }
 }
