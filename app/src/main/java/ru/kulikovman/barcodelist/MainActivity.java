@@ -169,7 +169,7 @@ public class MainActivity extends AppCompatActivity implements CallbackDialogFra
         // Получаем id элемента меню
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
+        // Обрабатываем нажатие
         if (id == R.id.action_delete_all_data) {
             // Предупреждение об удалении данных
             DialogFragment dataDeletionWarningDialog = new DataDeletionWarningDialog();
@@ -184,21 +184,22 @@ public class MainActivity extends AppCompatActivity implements CallbackDialogFra
             startActivity(intent);
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public void onDialogFinish(DialogFragment dialog) {
-        Log.d("log", "Запущен onDialogFinish в MainActivity");
-
+        // Если это диалог с предупреждением об удалении данных
         if (dialog.getClass() == DataDeletionWarningDialog.class) {
-            // Обновление списков
+            // Обновляем списки
             updateGroupAdapter();
 
-            // Сообщение об успешном удалении
-            DialogFragment dataHasBeenDeletedDialog = new DataHasBeenDeletedDialog();
-            dataHasBeenDeletedDialog.show(getSupportFragmentManager(), "dataHasBeenDeletedDialog");
+            // Если данные удалены
+            if (mRealm.isEmpty()) {
+                // Показываем сообщение об успешном удалении
+                DialogFragment dataHasBeenDeletedDialog = new DataHasBeenDeletedDialog();
+                dataHasBeenDeletedDialog.show(getSupportFragmentManager(), "dataHasBeenDeletedDialog");
+            }
         }
     }
 
