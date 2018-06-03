@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">Barcode list</string>
-    <string name="action_settings">Settings</string>
+    <!-- Названия -->
+    <string name="app_name">Список штрих-кодов</string>
+    <string name="edit_name">Редактирование</string>
 
     <!-- Ссылки на сканер -->
     <string name="zxing_package">com.google.zxing.client.android</string>

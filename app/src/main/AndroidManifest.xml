@@ -24,7 +24,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".EditGoodActivity">
+            android:name=".EditGoodActivity"
+            android:label="@string/edit_name">
         </activity>
     </application>
 
