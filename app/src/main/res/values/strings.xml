@@ -29,6 +29,7 @@
     <string name="edit_title_barcode">Номер штрих-кода:</string>
     <string name="edit_hint_name">Наименование</string>
     <string name="edit_hint_group">Группа</string>
+    <string name="send_barcode_list">Список штрих-кодов</string>
 
 
 </resources>

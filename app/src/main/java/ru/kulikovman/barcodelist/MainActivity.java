@@ -53,12 +53,7 @@ public class MainActivity extends AppCompatActivity implements CallbackDialogFra
             startInstallDialog();
         }
 
-        // Запускаем список
-        setUpRecyclerView();
-    }
-
-    private void setUpRecyclerView() {
-        // Подключение адаптера
+        // Запускаем список групп
         mAdapter = new GroupAdapter(this, getGroupList(), mRealm);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter);
@@ -66,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements CallbackDialogFra
     }
 
     public List<String> getGroupList() {
-        // Получение списка групп
+        // Формирование списка групп
         List<String> groups = new ArrayList<>();
 
         RealmResults<Good> goods = mRealm.where(Good.class)
@@ -126,15 +121,16 @@ public class MainActivity extends AppCompatActivity implements CallbackDialogFra
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
+
+        // Обрабатываем ответ сканера
         if (requestCode == 0) {
             if (resultCode == RESULT_OK) {
                 String contents = intent.getStringExtra("SCAN_RESULT");
                 String format = intent.getStringExtra("SCAN_RESULT_FORMAT");
                 Log.d("log", contents + " | " + format);
 
-                // Запускаем редактирование штрих-кода
+                // Обработка штрих-кода
                 openEditGoodActivity(contents);
-
             } else if (resultCode == RESULT_CANCELED) {
                 // Ничего не делаем
                 Log.d("log", "Операция сканирования штрих-кода отменена");
@@ -170,9 +166,7 @@ public class MainActivity extends AppCompatActivity implements CallbackDialogFra
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+        // Получаем id элемента меню
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
@@ -183,7 +177,11 @@ public class MainActivity extends AppCompatActivity implements CallbackDialogFra
             return true;
         } else if (id == R.id.action_send_data) {
             // Отправка данных
-
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("text/plain");
+            intent.putExtra(Intent.EXTRA_TEXT, getBarcodeList());
+            intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.send_barcode_list));
+            startActivity(intent);
             return true;
         }
 
@@ -207,5 +205,33 @@ public class MainActivity extends AppCompatActivity implements CallbackDialogFra
     private void updateGroupAdapter() {
         mAdapter.setGroups(getGroupList());
         mAdapter.notifyDataSetChanged();
+    }
+
+    public String getBarcodeList() {
+        // Получаем отсортированный список товаров
+        RealmResults<Good> goods = mRealm.where(Good.class).findAll()
+                .sort(new String[]{Good.GROUP, Good.NAME}, new Sort[]{Sort.ASCENDING, Sort.ASCENDING});
+
+        // Формируем сообщение
+        String message = "";
+        String group = "randomDefaultValue";
+        String temp;
+
+        for (Good good : goods) {
+            if (!good.getGroup().equals(group)) {
+                if (good.getGroup().equals("")) {
+                    temp = message + "\n" + "ОБЩАЯ ГРУППА:" + "\n"
+                            + good.getBarcode() + " - " + good.getName() + "\n";
+                } else {
+                    temp = message + "\n" + good.getGroup().toUpperCase() + ":" + "\n"
+                            + good.getBarcode() + " - " + good.getName() + "\n";
+                }
+            } else {
+                temp = message + good.getBarcode() + " - " + good.getName() + "\n";
+            }
+            message = temp;
+            group = good.getGroup();
+        }
+        return message.trim();
     }
 }
