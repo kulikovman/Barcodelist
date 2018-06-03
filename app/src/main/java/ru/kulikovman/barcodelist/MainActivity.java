@@ -19,6 +19,7 @@ import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
+import io.realm.Sort;
 import ru.kulikovman.barcodelist.adapters.GroupAdapter;
 import ru.kulikovman.barcodelist.dialogs.BarcodeIsExistDialog;
 import ru.kulikovman.barcodelist.dialogs.InstallBarcodeScannerDialog;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     private GroupAdapter mAdapter;
     private RecyclerView mRecyclerView;
+    private List<String> mGroupList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,21 +56,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setUpRecyclerView() {
-        // Получение списка групп
-        List<String> groups = new ArrayList<>();
-        RealmResults<Good> goods = mRealm.where(Good.class).findAll();
-        for (Good good : goods) {
-            String group = good.getGroup();
-            if (!groups.contains(group)){
-                groups.add(group);
-            }
-        }
-
         // Подключение адаптера
-        mAdapter = new GroupAdapter(this, groups, mRealm);
+        mAdapter = new GroupAdapter(this, getGroupList(), mRealm);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setHasFixedSize(true);
+    }
+
+    public List<String> getGroupList() {
+        // Получение списка групп
+        List<String> groups = new ArrayList<>();
+
+        RealmResults<Good> goods = mRealm.where(Good.class)
+                .sort(Good.GROUP, Sort.ASCENDING)
+                .findAll();
+
+        for (Good good : goods) {
+            String group = good.getGroup();
+            if (!groups.contains(group)) {
+                groups.add(group);
+            }
+        }
+        return groups;
     }
 
     @Override
@@ -76,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
 
         // Обновляем списки
+        mAdapter.setGroups(getGroupList());
         mAdapter.notifyDataSetChanged();
     }
 

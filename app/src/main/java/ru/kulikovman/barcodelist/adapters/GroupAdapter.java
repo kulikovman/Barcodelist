@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.security.acl.Group;
 import java.util.List;
 
 import io.realm.Realm;
@@ -92,5 +93,9 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
         mGroups = groups;
         mContext = context;
         mRealm = realm;
+    }
+
+    public void setGroups(List<String> groups) {
+        mGroups = groups;
     }
 }
