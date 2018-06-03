@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.security.acl.Group;
 import java.util.List;
 
+import io.realm.Case;
 import io.realm.Realm;
 import io.realm.RealmResults;
 import io.realm.Sort;
@@ -61,7 +62,6 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
                     .equalTo(Good.GROUP, group)
                     .sort(Good.NAME, Sort.ASCENDING)
                     .findAll();
-
 
             // Подключаем адаптер
             mAdapter = new GoodAdapter(mContext, goods);

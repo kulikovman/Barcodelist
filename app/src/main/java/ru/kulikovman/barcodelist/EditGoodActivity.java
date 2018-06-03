@@ -60,13 +60,16 @@ public class EditGoodActivity extends AppCompatActivity {
     }
 
     public void saveGood(View view) {
+        // Получаем данные из полей
         String name = mNameField.getText().toString().trim();
         String group = mGroupField.getText().toString().trim();
 
         // Форматируем название группы
-        String formatGroup = group.substring(0, 1).toUpperCase() + group.substring(1).toLowerCase();
+        if (!group.equals("")) {
+            group = group.substring(0, 1).toUpperCase() + group.substring(1).toLowerCase();
+        }
 
-        Log.d("log", "Получили строки из полей: " + name + " | " + formatGroup);
+        Log.d("log", "Получили строки из полей: " + name + " | " + group);
 
         // Если наименование не пустое
         if (!name.equals("")) {
@@ -74,9 +77,9 @@ public class EditGoodActivity extends AppCompatActivity {
             mRealm.beginTransaction();
             if (mGood != null) {
                 mGood.setName(name);
-                mGood.setGroup(formatGroup);
+                mGood.setGroup(group);
             } else {
-                mRealm.insert(new Good(mBarcode, name, formatGroup));
+                mRealm.insert(new Good(mBarcode, name, group));
             }
             mRealm.commitTransaction();
 
