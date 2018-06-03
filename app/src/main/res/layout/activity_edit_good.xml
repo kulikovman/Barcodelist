@@ -138,7 +138,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="20dp"
-        android:onClick="deleteButton"
+        android:onClick="deleteGood"
         android:text="@string/button_delete"
         app:layout_constraintEnd_toStartOf="@+id/edit_button_save"
         app:layout_constraintTop_toBottomOf="@+id/edit_group"/>
@@ -149,7 +149,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:onClick="saveButton"
+        android:onClick="saveGood"
         android:text="@string/button_save"
         app:layout_constraintBottom_toBottomOf="@+id/edit_button_delete"
         app:layout_constraintEnd_toEndOf="parent"

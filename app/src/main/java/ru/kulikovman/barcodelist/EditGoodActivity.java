@@ -59,24 +59,26 @@ public class EditGoodActivity extends AppCompatActivity {
         mRealm.close();
     }
 
-    public void saveButton(View view) {
-        String barcodeName = mNameField.getText().toString().trim();
-        String barcodeGroup = mGroupField.getText().toString().trim();
+    public void saveGood(View view) {
+        String name = mNameField.getText().toString().trim();
+        String group = mGroupField.getText().toString().trim();
 
-        Log.d("log", "Получили строки из полей: " + barcodeName + " | " + barcodeGroup);
+        // Форматируем название группы
+        String formatGroup = group.substring(0, 1).toUpperCase() + group.substring(1).toLowerCase();
+
+        Log.d("log", "Получили строки из полей: " + name + " | " + formatGroup);
 
         // Если наименование не пустое
-        if (!barcodeName.equals("")) {
+        if (!name.equals("")) {
             // Обновляем или создаем товар
             mRealm.beginTransaction();
             if (mGood != null) {
-                mGood.setName(barcodeName);
-                mGood.setGroup(barcodeGroup);
+                mGood.setName(name);
+                mGood.setGroup(formatGroup);
             } else {
-                mRealm.insert(new Good(mBarcode, barcodeName, barcodeGroup));
+                mRealm.insert(new Good(mBarcode, name, formatGroup));
             }
             mRealm.commitTransaction();
-            Log.d("log", "Товар успешно сохранен");
 
             // Переходим назад
             onBackPressed();
@@ -87,7 +89,7 @@ public class EditGoodActivity extends AppCompatActivity {
         }
     }
 
-    public void deleteButton(View view) {
+    public void deleteGood(View view) {
         // Удаляем товар
         if (mGood != null) {
             mRealm.beginTransaction();
