@@ -23,6 +23,7 @@ import io.realm.Sort;
 import ru.kulikovman.barcodelist.adapters.GroupAdapter;
 import ru.kulikovman.barcodelist.dialogs.BarcodeIsExistDialog;
 import ru.kulikovman.barcodelist.dialogs.DataDeletionWarningDialog;
+import ru.kulikovman.barcodelist.dialogs.DataHasBeenDeletedDialog;
 import ru.kulikovman.barcodelist.dialogs.InstallBarcodeScannerDialog;
 import ru.kulikovman.barcodelist.models.Good;
 
@@ -85,9 +86,8 @@ public class MainActivity extends AppCompatActivity implements CallbackDialogFra
     protected void onResume() {
         super.onResume();
 
-        // Обновляем списки
-        mAdapter.setGroups(getGroupList());
-        mAdapter.notifyDataSetChanged();
+        // Обновление списков
+        updateGroupAdapter();
     }
 
     @Override
@@ -192,6 +192,20 @@ public class MainActivity extends AppCompatActivity implements CallbackDialogFra
 
     @Override
     public void onDialogFinish(DialogFragment dialog) {
+        Log.d("log", "Запущен onDialogFinish в MainActivity");
 
+        if (dialog.getClass() == DataDeletionWarningDialog.class) {
+            // Обновление списков
+            updateGroupAdapter();
+
+            // Сообщение об успешном удалении
+            DialogFragment dataHasBeenDeletedDialog = new DataHasBeenDeletedDialog();
+            dataHasBeenDeletedDialog.show(getSupportFragmentManager(), "dataHasBeenDeletedDialog");
+        }
+    }
+
+    private void updateGroupAdapter() {
+        mAdapter.setGroups(getGroupList());
+        mAdapter.notifyDataSetChanged();
     }
 }

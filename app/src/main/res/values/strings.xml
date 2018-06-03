@@ -19,7 +19,7 @@
     <string name="message_barcode_is_exist">Товар с таким штрих-кодом уже присутствует в базе. Открыть его?</string>
     <string name="message_barcode_name_is_empty">Наименование товара не должно быть пустым!</string>
     <string name="message_data_deletion">Вы действительно хотите безвозвратно удалить все данные приложения?</string>
-    <string name="message_data_deleted">Все данные приложения были успешно удалены.</string>
+    <string name="message_data_deleted">Данные приложения были успешно удалены.</string>
 
     <!-- Пункты меню -->
     <string name="menu_send_data">Отправка данных</string>

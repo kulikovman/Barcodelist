@@ -45,10 +45,6 @@ public class DataDeletionWarningDialog extends CallbackDialogFragment {
                         mRealm.beginTransaction();
                         mRealm.deleteAll();
                         mRealm.commitTransaction();
-
-                        // Сообщение об успешном удалении
-                        DialogFragment dataHasBeenDeletedDialog = new DataHasBeenDeletedDialog();
-                        dataHasBeenDeletedDialog.show(getActivity().getSupportFragmentManager(), "dataHasBeenDeletedDialog");
                     }
                 })
                 .setNegativeButton(R.string.button_cancel, new DialogInterface.OnClickListener() {
