@@ -1,7 +1,6 @@
 package ru.kulikovman.barcodelist.adapters;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.content.res.AppCompatResources;
 import android.support.v7.widget.LinearLayoutManager;
@@ -33,7 +32,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
 
     public class GroupHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private GoodAdapter mAdapter;
-        private TextView mGroupName, mGroupCount;
+        private TextView mGroupName, mGoodCounter;
         private ImageView mGroupIcon;
         private RecyclerView mGroupRecyclerView;
 
@@ -45,7 +44,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
 
             // Инициализируем вью элементы
             mGroupName = itemView.findViewById(R.id.item_group_name);
-            mGroupCount = itemView.findViewById(R.id.item_group_count);
+            mGoodCounter = itemView.findViewById(R.id.item_group_good_counter);
             mGroupRecyclerView = itemView.findViewById(R.id.item_group_recyclerview);
             mGroupIcon = itemView.findViewById(R.id.item_group_icon);
         }
@@ -63,6 +62,9 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
         }
 
         public void bindGroup(String group) {
+            // По умолчанию группы всегда свернуты
+            mGroupRecyclerView.setVisibility(View.GONE);
+
             // Формируем список товаров группы
             RealmResults<Good> goods = mRealm.where(Good.class)
                     .equalTo(Good.GROUP, group)
@@ -76,7 +78,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
             mGroupName.setText(group);
 
             // Количество товаров в группе
-            mGroupCount.setText(String.valueOf(goods.size()));
+            mGoodCounter.setText(String.valueOf(goods.size()));
 
             // Подключаем адаптер
             mAdapter = new GoodAdapter(mContext, goods);
