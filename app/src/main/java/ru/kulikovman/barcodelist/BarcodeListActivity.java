@@ -27,7 +27,7 @@ import ru.kulikovman.barcodelist.dialogs.DataHasBeenDeletedDialog;
 import ru.kulikovman.barcodelist.dialogs.InstallBarcodeScannerDialog;
 import ru.kulikovman.barcodelist.models.Good;
 
-public class MainActivity extends AppCompatActivity implements CallbackDialogFragment.CallbackDialogListener {
+public class BarcodeListActivity extends AppCompatActivity implements CallbackDialogFragment.CallbackDialogListener {
     private Realm mRealm;
 
     private GroupAdapter mAdapter;
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements CallbackDialogFra
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_barcode_list);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
