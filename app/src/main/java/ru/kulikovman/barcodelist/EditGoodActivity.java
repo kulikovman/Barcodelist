@@ -15,10 +15,8 @@ import ru.kulikovman.barcodelist.models.Good;
 public class EditGoodActivity extends AppCompatActivity {
     private Realm mRealm;
     private Good mGood;
-
     private TextView mBarcodeField;
     private EditText mNameField, mGroupField;
-
     private String mBarcode;
 
     @Override

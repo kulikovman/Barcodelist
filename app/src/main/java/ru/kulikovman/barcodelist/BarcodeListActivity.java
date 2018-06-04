@@ -29,10 +29,8 @@ import ru.kulikovman.barcodelist.models.Good;
 
 public class BarcodeListActivity extends AppCompatActivity implements CallbackDialogFragment.CallbackDialogListener {
     private Realm mRealm;
-
     private GroupAdapter mAdapter;
     private RecyclerView mRecyclerView;
-    private List<String> mGroupList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +61,6 @@ public class BarcodeListActivity extends AppCompatActivity implements CallbackDi
     public List<String> getGroupList() {
         // Формирование списка групп
         List<String> groups = new ArrayList<>();
-
         RealmResults<Good> goods = mRealm.where(Good.class)
                 .sort(Good.GROUP, Sort.ASCENDING)
                 .findAll();
@@ -98,7 +95,6 @@ public class BarcodeListActivity extends AppCompatActivity implements CallbackDi
             pi = pm.getPackageInfo(getString(R.string.zxing_package), 0);
         } catch (PackageManager.NameNotFoundException ignored) {
         }
-
         return pi != null;
     }
 
@@ -110,6 +106,7 @@ public class BarcodeListActivity extends AppCompatActivity implements CallbackDi
 
     public void addBarcode(View view) {
         if (isExistBarcodeScannerApp()) {
+            // Запуск сканирования штрих-кода
             Intent intent = new Intent(getString(R.string.zxing_package) + ".SCAN");
             intent.putExtra("SCAN_MODE", "BAR_CODE_MODE");
             startActivityForResult(intent, 0);
@@ -179,7 +176,7 @@ public class BarcodeListActivity extends AppCompatActivity implements CallbackDi
             // Отправка данных
             Intent intent = new Intent(Intent.ACTION_SEND);
             intent.setType("text/plain");
-            intent.putExtra(Intent.EXTRA_TEXT, getBarcodeList());
+            intent.putExtra(Intent.EXTRA_TEXT, getGoodListForSend());
             intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.send_barcode_list));
             startActivity(intent);
             return true;
@@ -208,15 +205,14 @@ public class BarcodeListActivity extends AppCompatActivity implements CallbackDi
         mAdapter.notifyDataSetChanged();
     }
 
-    public String getBarcodeList() {
+    public String getGoodListForSend() {
         // Получаем отсортированный список товаров
         RealmResults<Good> goods = mRealm.where(Good.class).findAll()
                 .sort(new String[]{Good.GROUP, Good.NAME}, new Sort[]{Sort.ASCENDING, Sort.ASCENDING});
 
         // Формируем сообщение
-        String message = "";
+        String temp, message = "";
         String group = "randomDefaultValue";
-        String temp;
 
         for (Good good : goods) {
             if (!good.getGroup().equals(group)) {
