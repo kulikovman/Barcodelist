@@ -33,7 +33,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
 
     public class GroupHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private GoodAdapter mAdapter;
-        private TextView mGroupName;
+        private TextView mGroupName, mGroupCount;
         private ImageView mGroupIcon;
         private RecyclerView mGroupRecyclerView;
 
@@ -45,6 +45,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
 
             // Инициализируем вью элементы
             mGroupName = itemView.findViewById(R.id.item_group_name);
+            mGroupCount = itemView.findViewById(R.id.item_group_count);
             mGroupRecyclerView = itemView.findViewById(R.id.item_group_recyclerview);
             mGroupIcon = itemView.findViewById(R.id.item_group_icon);
         }
@@ -72,8 +73,10 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
             if (group.equals("")) {
                 group = "Общая группа";
             }
-            String itemGroup = group + " - " + goods.size();
-            mGroupName.setText(itemGroup);
+            mGroupName.setText(group);
+
+            // Количество товаров в группе
+            mGroupCount.setText(String.valueOf(goods.size()));
 
             // Подключаем адаптер
             mAdapter = new GoodAdapter(mContext, goods);
