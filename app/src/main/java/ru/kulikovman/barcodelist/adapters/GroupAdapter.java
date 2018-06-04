@@ -62,8 +62,9 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
         }
 
         public void bindGroup(String group) {
-            // По умолчанию группы всегда свернуты
+            // Вид по умолчанию - товары скрыты + иконка с заливкой
             mGroupRecyclerView.setVisibility(View.GONE);
+            mGroupIcon.setImageDrawable(AppCompatResources.getDrawable(mContext, R.drawable.ic_folder_black_24dp));
 
             // Формируем список товаров группы
             RealmResults<Good> goods = mRealm.where(Good.class)
