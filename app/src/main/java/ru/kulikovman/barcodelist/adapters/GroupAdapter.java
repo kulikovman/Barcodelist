@@ -62,18 +62,18 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupHolder>
         }
 
         public void bindGroup(String group) {
-            // Устанавливаем название группы
-            if (group.equals("")) {
-                mGroupName.setText("Общая группа");
-            } else {
-                mGroupName.setText(group);
-            }
-
             // Формируем список товаров группы
             RealmResults<Good> goods = mRealm.where(Good.class)
                     .equalTo(Good.GROUP, group)
                     .sort(Good.NAME, Sort.ASCENDING)
                     .findAll();
+
+            // Устанавливаем название группы
+            if (group.equals("")) {
+                group = "Общая группа";
+            }
+            String itemGroup = group + " - " + goods.size();
+            mGroupName.setText(itemGroup);
 
             // Подключаем адаптер
             mAdapter = new GoodAdapter(mContext, goods);
