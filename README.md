@@ -1,11 +1,11 @@
 # Barcodelist
-The application for task management, the main purpose of which is to make task management as simple and convenient as possible.
+An application for compiling a list of products by scanning bar codes.
 
 ## Application Functionality:
-* Quickly add tasks.
-* Quickly change the parameters of the task, without having to open it.
-* Sorting tasks by type and groups.
-* Support for custom groups.
+* Scanning barcodes with the power of a third-party application.
+* Create a list of scanned barcodes.
+* Ability to divide the goods into groups.
+* The list of goods can be mailed.
 
 ## Screenshots:
 ![screenshot of sample](http://kulikovman.ru/android/img/Barcodelist.jpg)
