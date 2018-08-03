@@ -5,6 +5,7 @@ An application for compiling a list of products by scanning bar codes.
 * Scanning barcodes with the power of a third-party application.
 * Create a list of scanned barcodes.
 * Ability to divide the goods into groups.
+* You can edit an already added product.
 * The list of goods can be mailed.
 
 ## Screenshots:
